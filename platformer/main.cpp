@@ -44,6 +44,7 @@ int main()
 				}
 				if (event.key.code == sf::Keyboard::Z) {
 					playerMoveY = -2.0f;
+					player.draw().setFillColor(sf::Color::Green);
 				}
 				
 			}
@@ -53,6 +54,9 @@ int main()
 				}
 				if (pressedRight && event.key.code == sf::Keyboard::Right) {
 					pressedRight = false;
+				}
+				if (event.key.code == sf::Keyboard::Z) {
+					player.draw().setFillColor(sf::Color::Blue);
 				}
 
 			}
@@ -76,11 +80,17 @@ int main()
 		playerMoveX = pressedRight - pressedLeft;
 		player.update(playerMoveX, playerMoveY);
 
-		// basic collision
+		// debug message
+		debugMessage.setString(
+			"player x position : " + std::to_string(player.getXPosition()) + '\n' +
+			"player y position : " + std::to_string(player.getYPosition()) + '\n'
+		);
 
+		// drawing stage
 		window.clear();
 		window.draw(player.draw());
 		window.draw(floor);
+		window.draw(debugMessage);
 		window.display();
 	}
 
